@@ -1,7 +1,8 @@
 function photographerTemplate(data) {
-    const { name, portrait, city, country, tagline, price } = data;
+    const { id, name, portrait, city, country, tagline, price } = data;
 
     const picture = `assets/photographers/${portrait}`;
+    const pagePhotographer = `/photographer.html?id=${id}`;
 
     function getUserCardDOM() {
         const article = document.createElement( 'article' );
@@ -17,13 +18,18 @@ function photographerTemplate(data) {
         const priceElement = document.createElement('p');
         priceElement.textContent = price + '€/jour';
 
+        const link = document.createElement('a');
+        link.setAttribute("href", pagePhotographer);
+        link.setAttribute("aria-label", "Aller à la page du photographe")
 
-        article.appendChild(img);
-        article.appendChild(h2);
+        link.appendChild(img);
+        link.appendChild(h2);
+
+        article.appendChild(link);
         article.appendChild(location);
         article.appendChild(description);
         article.appendChild(priceElement);
         return (article);
     }
-    return { name, picture, city, country, tagline, price, getUserCardDOM }
+    return { pagePhotographer, name, picture, city, country, tagline, price, getUserCardDOM }
 }
