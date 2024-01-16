@@ -15,6 +15,9 @@
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <div class="section-media">
+        
+      </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -22,7 +25,7 @@
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
+				<form name="contact" method="get" onsubmit="return validate()">
 					<div>
 						<label for="firstname">Prénom</label>
 						<input type="text" name="firstname" id="firstname"/>
