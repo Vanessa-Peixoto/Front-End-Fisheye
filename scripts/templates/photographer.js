@@ -20,15 +20,24 @@ function photographerTemplate(data) {
 
         const link = document.createElement('a');
         link.setAttribute("href", pagePhotographer);
-        link.setAttribute("aria-label", "Aller à la page du photographe")
+        link.setAttribute("aria-label", "Aller à la page du photographe");
+        link.setAttribute("tabindex", "0");
+
+        link.addEventListener('focus', () => {
+            console.log('le lien est focus');
+        })
 
         link.appendChild(img);
         link.appendChild(h2);
 
+        const pElement = document.createElement('div');
+        pElement.classList.add('information-section');
+        pElement.appendChild(location);
+        pElement.appendChild(description);
+        pElement.appendChild(priceElement);
+
         article.appendChild(link);
-        article.appendChild(location);
-        article.appendChild(description);
-        article.appendChild(priceElement);
+        article.appendChild(pElement);
         return (article);
     }
     return { pagePhotographer, name, picture, city, country, tagline, price, getUserCardDOM }
