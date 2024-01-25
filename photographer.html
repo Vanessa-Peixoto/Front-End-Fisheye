@@ -1,55 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <a href="index.html" aria-label="Retour à l'accueil">
-        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
-      </a>
-      
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
-      <div class="section-media">
 
-      </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form name="contact" method="get" onsubmit="return validate()">
-					<div>
-						<label for="firstname">Prénom</label>
-						<input type="text" name="firstname" id="firstname"/>
-					</div>
-          <div>
-						<label for="lastname">Nom</label>
-						<input type="text" name="lastname" id="lastname"/>
-					</div>
-          <div>
-						<label for="email">Email</label>
-						<input type="email" name="email" id="email"/>
-					</div>
-          <div>
-						<label for="message">Votre message</label>
-						<input type="textarea" name="message" id="message"/>
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+</head>
+
+<body>
+  <div id="lightbox">
+
+    <a href="#" class="close">
+      <img src="assets/icons/close.svg" style="background-color: black;" />
+    </a>
+
+    <button href="#">
+      <img src="assets/icons/left.svg" id="chevron-left" />
+    </button>
+
+    <div id="slider">
+    </div>
+
+    <button href="#">
+      <img src="assets/icons/right.svg" id="chevron-right" />
+    </button>
+
+  </div>
+  <header>
+    <a href="index.html" aria-label="Retour à l'accueil">
+      <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
+    </a>
+
+  </header>
+  <main id="main">
+    <div class="photograph-header">
+      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+    </div>
+    <section class="section-media">
+    </section>
+
+  </main>
+
+  <div id="encart"></div>
+
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <img src="assets/icons/close.svg" onclick="closeModal()" />
+      </header>
+      <form name="contact" method="get" onsubmit="return validate()">
+        <div>
+          <label for="firstname">Prénom</label>
+          <input type="text" name="firstname" id="firstname" />
+        </div>
+        <div>
+          <label for="lastname">Nom</label>
+          <input type="text" name="lastname" id="lastname" />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" />
+        </div>
+        <div>
+          <label for="message">Votre message</label>
+          <input type="textarea" name="message" id="message" />
+        </div>
+        <button class="contact_button">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <script src="/scripts/pages/photographer.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+</body>
+
 </html>

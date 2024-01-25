@@ -111,14 +111,69 @@ form input {
     justify-content: space-around;
 }
 
-.section-media img {
+.vignette {
     width: 350px;
     height: 300px;
     object-fit: cover;
 }
 
-.section-media video {
-    width: 350px;
-    height: 300px;
-    object-fit: cover;
+#lightbox {
+    border: 1px solid black;
+    text-align: center;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#lightbox.active {
+    display: flex;
+}
+
+.img {
+    width: 1050px;
+    height: 900px;
+}
+
+#chevron {
+    width: 96px;
+    height: 96px;
+}
+
+.close {
+    position: absolute;
+    top: 35px;
+    right: 63px;
+}
+
+.container-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24px;
+}
+
+.likes {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+}
+
+#encart {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 376px;
+    height: 69px;
+    margin-right: 50px;
+    border-radius: 5px 5px 0 0;
+    background-color: #DB8876;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 24px;
+}
+
+.container-likes {
+    display: flex;
+    align-items: center;
 }
