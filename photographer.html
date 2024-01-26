@@ -38,6 +38,14 @@
     <div class="photograph-header">
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     </div>
+
+    <label for="order-by">Trier par</label>
+    <select name="order-by" id="order-by">
+      <option value="popularite" selected>Popularité</option>
+      <option value="date">Date</option>
+      <option value="titre">Titre</option>
+    </select>
+
     <section class="section-media">
     </section>
 
@@ -48,7 +56,7 @@
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi</h2>
+        <h2 class="form-title">Contactez-moi</h2>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
       <form name="contact" method="get" onsubmit="return validate()">

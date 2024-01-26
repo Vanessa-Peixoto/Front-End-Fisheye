@@ -84,7 +84,7 @@ async function displayData(photographerData) {
             likesImg.alt = 'likes';
             likesImg.classList.add('likes');
 
-            const btnLikes = document.createElement('button'); 
+            const btnLikes = document.createElement('button');
             btnLikes.classList.add('btn-likes')
             btnLikes.appendChild(likesImg);
 
@@ -98,7 +98,7 @@ async function displayData(photographerData) {
             containerTitle.appendChild(titleElement);
             containerTitle.appendChild(containerLikes);
 
-            
+
 
             const a = document.createElement('a');
             a.setAttribute('href', '#');
@@ -113,7 +113,7 @@ async function displayData(photographerData) {
 
 
             mediaSection.appendChild(article);
-            
+
 
         } else {
             const video = mediaFiltre[i].video;
@@ -174,15 +174,15 @@ async function prepareSlider(photographerData) {
             lightbox.classList.add('active');
             const slider = document.getElementById('slider');
 
-        
+
         })
     }
 }
 
 
-setTimeout(function() {
+setTimeout(function () {
     let likes = document.querySelectorAll('.btn-likes');
-    for(let i = 0; i<likes.length; i++) {
+    for (let i = 0; i < likes.length; i++) {
         likes[i].addEventListener('click', (e) => {
             console.log('je click sur le coeur')
             //si je clique sur le coeur, j'ajoute + 1 au span
@@ -197,7 +197,7 @@ setTimeout(function() {
             let i = totalLikes.childNodes[0];
 
             let n = parseInt(i.innerHTML);
-            nNew = n +1;
+            nNew = n + 1;
             i.innerHTML = nNew;
 
         })
@@ -211,56 +211,287 @@ setTimeout(function() {
 
 async function createEncart() {
 
-const encart = document.getElementById('encart');
-const url = new URL(window.location.href);
+    const encart = document.getElementById('encart');
+    const url = new URL(window.location.href);
 
-// Récupérez les paramètres de l'URL
-const params = new URLSearchParams(url.search);
+    // Récupérez les paramètres de l'URL
+    const params = new URLSearchParams(url.search);
 
-// Récupérez la valeur du paramètre photographerId
-const id = params.get('id');
+    // Récupérez la valeur du paramètre photographerId
+    const id = params.get('id');
 
-const photographerData = await getDetailsPhotographers();
+    const photographerData = await getDetailsPhotographers();
 
-const mediaFiltre = photographerData.media.filter(data => data.photographerId === parseInt(id));
-const photographerFiltre = photographerData.photographers.filter(data => data.id === parseInt(id))[0];
+    const mediaFiltre = photographerData.media.filter(data => data.photographerId === parseInt(id));
+    const photographerFiltre = photographerData.photographers.filter(data => data.id === parseInt(id))[0];
 
-console.log(mediaFiltre, photographerFiltre);
+    console.log(mediaFiltre, photographerFiltre);
 
-const sum = mediaFiltre.reduce((accumulateur, object) => {
-    return accumulateur + object.likes;
+    const sum = mediaFiltre.reduce((accumulateur, object) => {
+        return accumulateur + object.likes;
+
+    }, 0);
+    console.log(sum)
+
+    const totalLikes = document.createElement('p');
+    totalLikes.textContent = sum;
+
+    const likesImg = document.createElement('img');
+    likesImg.setAttribute('src', 'assets/icons/heart.svg');
+    likesImg.alt = 'likes';
+    likesImg.classList.add('likes');
+
+    const containerLikes = document.createElement('div');
+    containerLikes.classList.add('container-likes')
+    containerLikes.appendChild(totalLikes);
+    containerLikes.appendChild(likesImg);
+
+
+
+    const price = photographerFiltre.price;
+    console.log(price);
+    const p = document.createElement('p');
+    p.textContent = price + '€ / jour';
+
+    const containerPrice = document.createElement('div');
+    containerPrice.appendChild(p);
+
+    encart.appendChild(containerLikes);
+    encart.appendChild(containerPrice);
+
+
+}
+
+//Trie liste déroulante
+
+async function orderBy() {
+    const photographerData = await getDetailsPhotographers();
+
+    const url = new URL(window.location.href);
+
+    // Récupérez les paramètres de l'URL
+    const params = new URLSearchParams(url.search);
+
+    // Récupérez la valeur du paramètre photographerId
+    const id = params.get('id');
+
     
-}, 0);
-console.log(sum)
 
-const totalLikes = document.createElement('p');
-totalLikes.textContent = sum;
+    const photographerFiltre = photographerData.photographers.filter(data => data.id === parseInt(id))[0];
 
-const likesImg = document.createElement('img');
+    const mediaFiltre = photographerData.media.filter(data => data.photographerId === parseInt(id));
+
+    const select = document.getElementById('order-by');
+    const name = photographerFiltre.name.split(' ')[0].replace('-', ' ')
+
+    select.addEventListener('change', (e) => {
+
+        if (e.currentTarget.options[select.selectedIndex].value === "popularite") {
+            //sort
+            console.log('je suis dans popularité');
+            mediaFiltre.sort((a, b) => {
+                return b.likes - a.likes;
+            })
+            let mediaSection = document.querySelector('.section-media');
+            mediaSection.innerHTML = "";
+            for (let i = 0; i < mediaFiltre.length; i++) {
+            const img = mediaFiltre[i].image;
+            const path = 'assets/images/' + name + '/' + img;
+            const imgElement = document.createElement('img');
+            imgElement.setAttribute('src', path);
+            imgElement.alt = mediaFiltre[i].title;
+            imgElement.classList.add('vignette')
+            const title = mediaFiltre[i].title;
+            const titleElement = document.createElement('p');
+            titleElement.textContent = title;
+
+            const likes = mediaFiltre[i].likes;
+            likesElement = document.createElement('span');
+            likesElement.textContent = likes;
+
+            const likesImg = document.createElement('img');
             likesImg.setAttribute('src', 'assets/icons/heart.svg');
             likesImg.alt = 'likes';
             likesImg.classList.add('likes');
 
-const containerLikes = document.createElement('div');
-containerLikes.classList.add('container-likes')
-containerLikes.appendChild(totalLikes);
-containerLikes.appendChild(likesImg);
+            const btnLikes = document.createElement('button');
+            btnLikes.classList.add('btn-likes')
+            btnLikes.appendChild(likesImg);
+
+
+            const containerLikes = document.createElement('div');
+            containerLikes.appendChild(likesElement);
+            containerLikes.appendChild(btnLikes);
+
+            const containerTitle = document.createElement('div');
+            containerTitle.classList.add('container-title');
+            containerTitle.appendChild(titleElement);
+            containerTitle.appendChild(containerLikes);
 
 
 
-const price = photographerFiltre.price;
-console.log(price);
-const p = document.createElement('p');
-p.textContent = price + '€ / jour';
-
-const containerPrice = document.createElement('div');
-containerPrice.appendChild(p);
-
-encart.appendChild(containerLikes);
-encart.appendChild(containerPrice);
+            const a = document.createElement('a');
+            a.setAttribute('href', '#');
+            a.classList.add('media');
 
 
+            a.appendChild(imgElement);
+
+            const article = document.createElement('article');
+            article.appendChild(a);
+            article.appendChild(containerTitle);
+
+
+            mediaSection.append(article);
+        }
+
+
+
+        } else if (e.currentTarget.options[select.selectedIndex].value === 'date') {
+            console.log('je suis dans date');
+                function comparerDates(objetA, objetB) {
+                    const dateA = new Date(objetA.date);
+                    const dateB = new Date(objetB.date);
+                  
+                    return dateB - dateA;
+                }
+                mediaFiltre.sort(comparerDates);
+
+            let mediaSection = document.querySelector('.section-media');
+            mediaSection.innerHTML = "";
+            for (let i = 0; i < mediaFiltre.length; i++) {
+            const img = mediaFiltre[i].image;
+            const path = 'assets/images/' + name + '/' + img;
+            const imgElement = document.createElement('img');
+            imgElement.setAttribute('src', path);
+            imgElement.alt = mediaFiltre[i].title;
+            imgElement.classList.add('vignette')
+            const title = mediaFiltre[i].title;
+            const titleElement = document.createElement('p');
+            titleElement.textContent = title;
+
+            const likes = mediaFiltre[i].likes;
+            likesElement = document.createElement('span');
+            likesElement.textContent = likes;
+
+            const likesImg = document.createElement('img');
+            likesImg.setAttribute('src', 'assets/icons/heart.svg');
+            likesImg.alt = 'likes';
+            likesImg.classList.add('likes');
+
+            const btnLikes = document.createElement('button');
+            btnLikes.classList.add('btn-likes')
+            btnLikes.appendChild(likesImg);
+
+
+            const containerLikes = document.createElement('div');
+            containerLikes.appendChild(likesElement);
+            containerLikes.appendChild(btnLikes);
+
+            const containerTitle = document.createElement('div');
+            containerTitle.classList.add('container-title');
+            containerTitle.appendChild(titleElement);
+            containerTitle.appendChild(containerLikes);
+
+
+
+            const a = document.createElement('a');
+            a.setAttribute('href', '#');
+            a.classList.add('media');
+
+
+            a.appendChild(imgElement);
+
+            const article = document.createElement('article');
+            article.appendChild(a);
+            article.appendChild(containerTitle);
+
+
+            mediaSection.append(article);
+        }
+
+        } else if (e.currentTarget.options[select.selectedIndex].value === "titre") {
+            console.log('je suis dans titre');
+            function comparerOrdreAlphabetique(objetA, objetB) {
+                const nomA = objetA.title;
+                const nomB = objetB.title;
+              
+                if (nomA < nomB) {
+                  return -1; // A vient avant B
+                } else if (nomA > nomB) {
+                  return 1; // B vient avant A
+                } else {
+                  return 0; // Les noms sont égaux
+                }
+            }
+
+            mediaFiltre.sort(comparerOrdreAlphabetique);
+            let mediaSection = document.querySelector('.section-media');
+            mediaSection.innerHTML = "";
+            for (let i = 0; i < mediaFiltre.length; i++) {
+            const img = mediaFiltre[i].image;
+            const path = 'assets/images/' + name + '/' + img;
+            const imgElement = document.createElement('img');
+            imgElement.setAttribute('src', path);
+            imgElement.alt = mediaFiltre[i].title;
+            imgElement.classList.add('vignette')
+            const title = mediaFiltre[i].title;
+            const titleElement = document.createElement('p');
+            titleElement.textContent = title;
+
+            const likes = mediaFiltre[i].likes;
+            likesElement = document.createElement('span');
+            likesElement.textContent = likes;
+
+            const likesImg = document.createElement('img');
+            likesImg.setAttribute('src', 'assets/icons/heart.svg');
+            likesImg.alt = 'likes';
+            likesImg.classList.add('likes');
+
+            const btnLikes = document.createElement('button');
+            btnLikes.classList.add('btn-likes')
+            btnLikes.appendChild(likesImg);
+
+
+            const containerLikes = document.createElement('div');
+            containerLikes.appendChild(likesElement);
+            containerLikes.appendChild(btnLikes);
+
+            const containerTitle = document.createElement('div');
+            containerTitle.classList.add('container-title');
+            containerTitle.appendChild(titleElement);
+            containerTitle.appendChild(containerLikes);
+
+
+
+            const a = document.createElement('a');
+            a.setAttribute('href', '#');
+            a.classList.add('media');
+
+
+            a.appendChild(imgElement);
+
+            const article = document.createElement('article');
+            article.appendChild(a);
+            article.appendChild(containerTitle);
+
+
+            mediaSection.append(article);
+        }
+
+              
+        }
+
+
+    })
 }
+
+
+
+
+
+
+
 
 
 
@@ -275,3 +506,4 @@ async function main() {
 main();
 
 getDetailsPhotographers()
+orderBy()
