@@ -12,18 +12,18 @@
 <body>
   <div id="lightbox">
 
-    <a href="#" class="close">
+    <a href="#" class="close" onclick="closeLightbox()">
       <img src="assets/icons/close.svg" style="background-color: black;" />
     </a>
 
-    <button href="#">
+    <button href="#" class="btn-prev">
       <img src="assets/icons/left.svg" id="chevron-left" />
     </button>
 
     <div id="slider">
     </div>
 
-    <button href="#">
+    <button href="#" class="btn-next">
       <img src="assets/icons/right.svg" id="chevron-right" />
     </button>
 
@@ -39,7 +39,7 @@
       <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
     </div>
 
-    <label for="order-by">Trier par</label>
+    <label for="order-by" class="label">Trier par</label>
     <select name="order-by" id="order-by">
       <option value="popularite" selected>Popularité</option>
       <option value="date">Date</option>
@@ -56,10 +56,10 @@
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2 class="form-title">Contactez-moi</h2>
+        <h2 class="form-title"></h2>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form name="contact" method="get" onsubmit="return validate()">
+      <form name="contact" method="get" onsubmit="return validate()" action="index.html">
         <div>
           <label for="firstname">Prénom</label>
           <input type="text" name="firstname" id="firstname" />
@@ -76,12 +76,17 @@
           <label for="message">Votre message</label>
           <input type="textarea" name="message" id="message" />
         </div>
-        <button class="contact_button">Envoyer</button>
+        <button type="submit" class="contact_button">Envoyer</button>
       </form>
     </div>
   </div>
+  <script src="/scripts/entity/Media.js"></script>
+  <script src="/scripts/entity/Image.js"></script>
+  <script src="/scripts/entity/Video.js"></script>
+  <script src="/scripts/factory/MediaFactory.js"></script>
   <script src="/scripts/pages/photographer.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/utils/slider.js"></script>
 </body>
 
 </html>

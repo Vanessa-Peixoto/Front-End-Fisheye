@@ -109,6 +109,7 @@ form input {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin-top: 40px;
 }
 
 .vignette {
@@ -118,7 +119,11 @@ form input {
 }
 
 #lightbox {
-    border: 1px solid black;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #FAFAFA;
     text-align: center;
     display: none;
     justify-content: space-around;
@@ -150,12 +155,17 @@ form input {
     align-items: center;
     justify-content: space-between;
     font-size: 24px;
+    color: #901C1C;
+}
+
+.btn-likes {
+    border: none;
+    background-color: #FAFAFA;
 }
 
 .likes {
     width: 18px;
     height: 18px;
-    margin-left: 10px;
 }
 
 #encart {
@@ -177,3 +187,46 @@ form input {
     display: flex;
     align-items: center;
 }
+
+#chevron-right {
+    width: 48px;
+}
+
+#chevron-left {
+    width: 48px;
+}
+
+#slider .vignette {
+    display: none;
+}
+
+#slider .vignette.active {
+    display: block;
+    width: 900px;
+    height: 700px;
+    object-fit: contain;
+}
+
+.btn-prev, .btn-next {
+    border: none;
+    background-color: #FAFAFA;
+}
+
+#order-by {
+    width: 170px;
+    height: 69px;
+    background-color: #901C1C;
+    color: white;
+    font-size: 18px;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 95px;
+    margin-right: 15px;
+}
+    
