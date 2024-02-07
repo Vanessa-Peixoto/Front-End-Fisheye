@@ -19,7 +19,7 @@ class Video extends Media {
 
         const article = this.createArticle();
         const a = article.querySelector('.media');
-    
+
         a.appendChild(videoElement);
 
         return article;
