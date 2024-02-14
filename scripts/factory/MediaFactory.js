@@ -7,7 +7,7 @@ class MediaFactory {
             const url = 'assets/images/' + photographerName + '/' + data.video;
             return new Video(data, url);
         } else {
-            throw 'Unknown type format'
+            throw 'Unknown type format';
         }
     }
 }

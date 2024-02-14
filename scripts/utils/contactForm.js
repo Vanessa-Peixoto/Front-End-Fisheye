@@ -1,13 +1,31 @@
+document.addEventListener('keydown', handleActionKeydown);
+
+function handleActionKeydown(ev) {
+    if(ev.keyCode === 27) {
+        closeModal();
+    }
+}
+
+/**
+ * @description Open the contact modal
+ */
 function displayModal() {
     const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
+    
 }
 
+/**
+ * @description Close the contact modal
+ */
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
 
+/**
+ * @description Validate the data in form
+ */
 function validate() {
 
     const data = {
@@ -19,28 +37,15 @@ function validate() {
     console.log(data);
 }
 
+/**
+ * @description Recover the photographer data
+ */
 async function getPhotographers() {
-    const response = await fetch("../../data/photographers.json");
-    const photographerData = await response.json();
-
-    const url = new URL(window.location.href);
-
-    // Récupérez les paramètres de l'URL
-    const params = new URLSearchParams(url.search);
-
-    // Récupérez la valeur du paramètre photographerId
-    const id = params.get('id');
-
-    const photographerFiltre = photographerData.photographers.filter(data => data.id === parseInt(id))[0];
-
-    const namePhotographer = photographerFiltre.name;
-    console.log(namePhotographer);
-
+    const photographerData = await getPhotographer()
+    const namePhotographer = photographerData.photographerFiltre.name;
     const form = document.querySelector('.form-title');
-
     const h2 = form.closest('h2');
     h2.textContent = "Contactez-moi " + namePhotographer;
-
 }
 
 getPhotographers();

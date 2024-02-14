@@ -22,7 +22,12 @@ class Media {
         return this._price;
     }
 
+    /**
+     * @description Create article element
+     * @returns {HTMLElement}
+     */
     createArticle() {
+        //create elements of article
         const titleElement = document.createElement('p');
         titleElement.textContent = this.title;
 
@@ -55,6 +60,7 @@ class Media {
         article.appendChild(a);
         article.appendChild(containerTitle);
 
+        //return article element
         return article;
     }
 }

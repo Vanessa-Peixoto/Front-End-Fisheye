@@ -1,0 +1,81 @@
+:root {
+    --main-bg-color: #DB8876;
+}
+
+#contact_modal {
+    display: none;
+    position: fixed;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    width: 100%;
+}
+
+.modal {
+    border-radius: 5px;
+    background-color: var(--main-bg-color);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.modal header {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img {
+    cursor: pointer;
+}
+
+.modal header h2 {
+    font-size: 52px;
+    font-weight: normal;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 40px;
+}
+
+form label {
+    color: #525252;
+    font-size: 36px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+    line-height: 2.5em;
+}
+
+form input {
+    width: 100%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 95px;
+    margin-right: 15px;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
