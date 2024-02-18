@@ -6,7 +6,7 @@ let photographerData = null;
 async function getDetailsPhotographers() {
     if (!photographerData) {
         try {
-            const response = await fetch("../../data/photographers.json");
+            const response = await fetch("data/photographers.json");
             if (!response.ok) {
                 throw new Error('Erreur lors du chargement du fichier JSON');
             }
@@ -43,6 +43,44 @@ async function getPhotographer() {
 }
 
 /**
+ * @description Sort by popularity
+ * @param {Element} mediaA 
+ * @param {Element} mediaB 
+ */
+function sortByPopularity(mediaA, mediaB) {
+    return mediaB.likes - mediaA.likes;
+}
+
+/**
+ * @description Sort by date
+ * @param {Element} mediaA 
+ * @param {Element} mediaB 
+ */
+function sortByDate(mediaA, mediaB) {
+    const dateA = new Date(mediaA.date);
+    const dateB = new Date(mediaB.date);
+    return dateB - dateA;
+}
+
+/**
+ * @description Sort by title
+ * @param {Element} mediaA 
+ * @param {Element} mediaB 
+ */
+function sortByTitle(mediaA, mediaB) {
+    const nomA = mediaA.title;
+    const nomB = mediaB.title;
+
+    if (nomA < nomB) {
+        return -1;
+    } else if (nomA > nomB) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/**
  * @description Create media element
  * @param {string} sortBy 
  */
@@ -54,34 +92,19 @@ async function createMedias(sortBy) {
 
     //sort media based on specific criteria
     if (sortBy === 'popularite') {
-        media.sort((a, b) => b.likes - a.likes);
-
+        media.sort(sortByPopularity);
     } else if (sortBy === 'date') {
-        media.sort(function (a, b) {
-            const dateA = new Date(a.date);
-            const dateB = new Date(b.date);
-            return dateB - dateA;
-        });
-
+        media.sort(sortByDate);
     } else if (sortBy === 'titre') {
-        media.sort(function (a, b) {
-            const nomA = a.title;
-            const nomB = b.title;
-
-            if (nomA < nomB) {
-                return -1;
-            } else if (nomA > nomB) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
+        media.sort(sortByTitle);
     }
 
     for (let i = 0; i < media.length; i++) {
         const type = media[i].hasOwnProperty('image') ? 'image' : 'video';
         const mediaObject = new MediaFactory(media[i], photographer.name, type);
         const article = mediaObject.createElement(i);
+        const btnLike = article.querySelector('.btn-likes');
+        btnLike.addEventListener('click', handleLikeClick);
         mediaSection.appendChild(article);
     }
 }
@@ -119,34 +142,24 @@ async function createHeader() {
     headerSection.appendChild(imgElement);
 }
 
-setTimeout(function () {
-    let likes = document.querySelectorAll('.btn-likes');
+/**
+ * @description Action to add new like
+ * @param {Event} e 
+ */
+function handleLikeClick(e) {
+    let element = e.currentTarget.previousSibling;
 
-    console.log('je click sur le coeur')
-    //si je clique sur le coeur, j'ajoute + 1 au span
-    function handleLikeClick(e) {
-        let element = e.currentTarget.previousSibling;
+    let currentLikes = parseInt(element.innerHTML);
+    element.innerHTML = ++currentLikes;
 
-        let compteur = parseInt(element.innerHTML);
-        let compteurIncremente = compteur + 1;
+    let totalLikes = document.querySelector('.container-likes');
+    let i = totalLikes.childNodes[0];
 
-        element.innerHTML = compteurIncremente;
+    let totalEncartLikes = parseInt(i.innerHTML);
+    i.innerHTML = ++totalEncartLikes;
 
-        let totalLikes = document.querySelector('.container-likes');
-        let i = totalLikes.childNodes[0];
-
-        let n = parseInt(i.innerHTML);
-        nNew = n + 1;
-        i.innerHTML = nNew;
-
-        e.currentTarget.removeEventListener('click', handleLikeClick);
-    }
-    for (let i = 0; i < likes.length; i++) {
-        likes[i].addEventListener('click', handleLikeClick)
-
-    }
-
-}, 2000);
+    e.currentTarget.removeEventListener('click', handleLikeClick);
+}
 
 /**
  * @description Create encart with price and total likes
