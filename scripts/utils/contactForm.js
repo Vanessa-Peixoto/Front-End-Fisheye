@@ -1,7 +1,7 @@
 document.addEventListener('keydown', handleActionKeydown);
 
 function handleActionKeydown(ev) {
-    if(ev.keyCode === 27) {
+    if (ev.keyCode === 27) {
         closeModal();
     }
 }
@@ -11,8 +11,8 @@ function handleActionKeydown(ev) {
  */
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-	modal.style.display = "flex";
-    
+    modal.style.display = "flex";
+
 }
 
 /**

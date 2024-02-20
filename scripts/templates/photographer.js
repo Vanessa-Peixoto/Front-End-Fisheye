@@ -5,11 +5,11 @@ function photographerTemplate(data) {
     const pagePhotographer = `photographer.html?id=${id}`;
 
     function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
+        const article = document.createElement('article');
+        const img = document.createElement('img');
         img.setAttribute("src", picture);
         img.alt = 'portrait de ' + name;
-        const h2 = document.createElement( 'h2' );
+        const h2 = document.createElement('h2');
         h2.textContent = name;
         const location = document.createElement('p');
         location.textContent = city + ', ' + country;

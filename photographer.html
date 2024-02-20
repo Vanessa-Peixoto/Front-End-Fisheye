@@ -14,14 +14,15 @@
   <div id="lightbox" aria-label="image closeup view">
 
     <a href="#" class="close" onclick="closeLightbox()" aria-label="Close dialog">
-      <img src="assets/icons/close.svg" alt="Close"/>
+      <img src="assets/icons/close.svg" alt="Close" />
     </a>
 
     <button class="btn-prev" aria-label="Previous image">
-      <img src="assets/icons/left.svg" id="chevron-left" alt="Previous"/>
+      <img src="assets/icons/left.svg" id="chevron-left" alt="Previous" />
     </button>
 
-    <div id="slider" role="slider" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1" aria-label="Photographer detail content">
+    <div id="slider" role="slider" aria-valuemin="1" aria-valuemax="20" aria-valuenow="1"
+      aria-label="Photographer detail content">
     </div>
 
     <button class="btn-next" aria-label="Next image">
@@ -60,31 +61,30 @@
     <div class="modal" role="dialog" aria-hidden="true">
       <header>
         <h2 class="form-title"></h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire"/>
+        <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer le formulaire" />
       </header>
       <form name="contact" method="get" onsubmit="return validate()" action="index.html" role="form">
         <fieldset>
           <div>
-          <label for="firstname">Prénom</label>
-          <input type="text" name="firstname" id="firstname" required/>
-        </div>
-        <div>
-          <label for="lastname">Nom</label>
-          <input type="text" name="lastname" id="lastname" required />
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" required/>
-        </div>
-      </fieldset>
-        
-      <fieldset>
-        <div>
-          <label for="message">Votre message</label>
-          <textarea name="message" id="message" required></textarea>
-        </div>
+            <label for="firstname">Prénom</label>
+            <input type="text" name="firstname" id="firstname" required />
+          </div>
+          <div>
+            <label for="lastname">Nom</label>
+            <input type="text" name="lastname" id="lastname" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required />
+          </div>
+        </fieldset>
 
-      </fieldset>
+        <fieldset>
+          <div>
+            <label for="message">Votre message</label>
+            <textarea name="message" id="message" required></textarea>
+          </div>
+        </fieldset>
         <button type="submit" class="contact_button">Envoyer</button>
       </form>
     </div>

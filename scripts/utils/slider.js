@@ -40,9 +40,9 @@ document.addEventListener('keydown', handleActionKeydown);
 function handleActionKeydown(event) {
     if (event.keyCode === 39) {
         handleSliderAction('next');
-    } else if(event.keyCode === 37) {
+    } else if (event.keyCode === 37) {
         handleSliderAction('previous');
-    } else if(event.keyCode === 27) {
+    } else if (event.keyCode === 27) {
         closeLightbox();
     }
 }
